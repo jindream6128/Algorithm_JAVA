@@ -56,5 +56,6 @@ $RECYCLE.BIN/
 # ideaforlder
 .idea
 *.iml
+out
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java
