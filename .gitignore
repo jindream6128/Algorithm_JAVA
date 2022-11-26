@@ -53,4 +53,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# ideaforlder
+.idea
+*.iml
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,java
