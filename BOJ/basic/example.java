@@ -4,12 +4,18 @@ public class example {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringBuilder sb = new StringBuilder();
 
-        String s = br.readLine();
-        sb.append(s.charAt(0)*3);
-        System.out.println(String.valueOf(sb));
-        System.out.println(s.charAt(0));
+        int[] arr = new int[9];
+        int[] arr2 = {1,2,3,4,5,6,7,8,9};
+
+        arr2[0] =0;
+
+        for (int i =0; i<9; i++){
+            System.out.println(arr2[i]);
+        }
+
+        br.close();
+        bw.close();
 
 
     }
