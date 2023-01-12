@@ -12,31 +12,18 @@ public class boj_2851 {
         for (int i = 0; i < 10; i++) {
             arr[i] = Integer.parseInt(br.readLine());
         }
+        int sum = 0;
+        int ans =0;
 
-        int afternum =arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            //beforenum 값에는 afternum에 다음 버섯을 먹기전 점수가 저장된다
-            int beforenum  = afternum;
-            // 다음 버섯을 먹은 점수가 저장된다
-            afternum += arr[i];
-            
-            if (afternum > 100) {
-                if (Math.abs(beforenum - 100) < Math.abs(afternum - 100)) {
-                    bw.write(String.valueOf(beforenum));
-                    bw.close();
-                } else if (Math.abs(beforenum - 100) >= Math.abs(afternum - 100)) {
-                    bw.write(String.valueOf(afternum));
-                    bw.close();
-                }
-                //한번 그만먹으면 끝
-                return;
-            } else if (beforenum == afternum){
-                //안먹었다는 소리
-                bw.write(String.valueOf(afternum));
-                bw.close();
-                return;
+        for (int i =0 ;i<arr.length;i++){
+            sum += arr[i];
+            if(Math.abs(sum-100) <= Math.abs(ans-100)){
+                ans = sum;
             }
+            else if(sum >100){break;}
         }
-        bw.close();
+        bw.write(String.valueOf(ans));
+        br.close();
+        bw.flush();
     }
 }
