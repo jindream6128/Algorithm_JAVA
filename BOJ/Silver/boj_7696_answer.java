@@ -5,7 +5,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class boj_7696_answer {
-    static boolean isDistinctNumber(int number) {
+    static int[] allarr = new int[1_000_001];
+
+    static boolean check(int number) {
         int digits = 0;
 
         while (number > 0) {
@@ -19,34 +21,30 @@ public class boj_7696_answer {
         return false;
     }
 
-    static int[] cache = new int[1_000_000 + 1];
 
-    static void precalculate() {
-        int testNumber = 0;
-        for (int number = 1; number <= 1_000_000;) {
-            testNumber++;
-            if (isDistinctNumber(testNumber)) {
+    static void precal(){
+        int testNum = 0;
+        for(int number = 1; number<=1_000_000;){
+            testNum++;
+            if(check(testNum)){
                 continue;
             }
-            cache[number] = testNumber;
+            allarr[number] = testNum;
             number++;
         }
     }
-
     public static void main(String[] args) throws IOException {
-        try (
-                var br = new BufferedReader(new InputStreamReader(System.in));
-                var bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        ) {
-            precalculate();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        precal();
+        while(true){
+            int n = Integer.parseInt(br.readLine());
+            if(n==0) break;
 
-            while (true) {
-                int n = Integer.parseInt(br.readLine());
-                if (n == 0) break;
-
-                bw.write(String.valueOf(cache[n]));
-                bw.newLine();
-            }
+            bw.write(String.valueOf(allarr[n]));
+            bw.newLine();
         }
+        br.close();
+        bw.close();
     }
 }
