@@ -8,15 +8,19 @@ public class boj_7696 {
     //모든 값을 넣어둘 크기가 1,000,001 list생성
     static int[] allarr = new int[1_000_001];
 
+    static List<Integer> list = new ArrayList<>();
+    static Set<Integer> listset = new HashSet<>();
+
     //중복값 확인
     static boolean check(int number){
-        List<Integer> list = new ArrayList<>();
+        list.clear();
         while(number >0) {
             int digit = number % 10;
             list.add(digit);
             number /= 10;
         }
-        Set<Integer> listset = new HashSet<>(list);
+        listset.clear();
+        listset.addAll(list);
         
         if(list.size() != listset.size()){
             return true; //두개의 리스트 크기가 다르면 중복값이 없다.
