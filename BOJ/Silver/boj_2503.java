@@ -25,16 +25,42 @@ public class boj_2503 {
 
         //전부 탐색 서로 다른 숫자
         for(int i = 123 ; i< 988;i++){
-            for(int j = 0; j <n; j++){
-                int s = 0; int b =0;
+            int strike_test =0;
+            int ball_test =0;
+            for(int j =1; j<n+1;j++){
+                strike_test = 0;
+                ball_test=0;
+
                 //1의자리
-                char a1 = (char)(arr[j]%10);
+                int a1 = arr[j]%10;
                 // 10의 자리
-                char a10 = (char)((arr[j]%100)/10);
+                int a10 = (arr[j]%100)/10;
                 //100의자리
-                char a100 = (char)(arr[j]/100);
-                //if()
+                int a100 = arr[j]/100;
+
+                //100의자리 동일
+                if(a100 == i/100) {strike_test ++;}
+                else if(a100 == (i%100)/10) {ball_test++;}
+                else if(a100 == (i%10)) {ball_test++;}
+
+                //10
+                if(a10 == i/100) {ball_test ++;}
+                else if(a10 == (i%100)/10) {strike_test++;}
+                else if(a10 == (i%10)) {ball_test++;}
+
+                //1
+                if(a1 == i/100) {ball_test ++;}
+                else if(a1 == (i%100)/10) {ball_test++;}
+                else if(a1 == (i%10)) {strike_test++;}
+
+                //스트라이크랑 볼이 동일해야한다
+                if(strike[j] == strike_test && ball[j] == ball_test)
+                {
+                    result++;
+                }
             }
         }
+        System.out.println(result);
+        br.close();
     }
 }
