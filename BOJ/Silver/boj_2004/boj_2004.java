@@ -6,35 +6,24 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class boj_2004 {
-    //팩토리얼
-    static long factorial(long n) {
-        if (n <= 1) {
-            return 1;
-        } else {
-            return n * factorial(n - 1);
-        }
-    }
 
-    static int count2(long n){
-        int count = 0;
+    static int cnt5(long n){
         long num = n;
-
-        while(num >= 2){
-            count += num/2;
-            num=num/2;
+        long cnt =0;
+        while (num > 0) {
+            cnt += num/5;
+            num = num/5;
         }
-        return count;
+        return (int)cnt;
     }
-
-    static int count5(long n){
-        int count = 0;
+    static int cnt2(long n){
         long num = n;
-
-        while(num >= 5){
-            count += num/5;
-            num=num/5;
+        long cnt =0;
+        while (num > 0) {
+            cnt += num/2;
+            num = num/2;
         }
-        return count;
+        return (int)cnt;
     }
 
     public static void main(String[] args) throws IOException {
@@ -42,14 +31,13 @@ public class boj_2004 {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         long n = Long.parseLong(st.nextToken());
-        long m = Long.parseLong(st.nextToken());
+        long k = Long.parseLong(st.nextToken());
 
-        // nCm = n! / ((n-m)! * m!)
-        // cnt2 = n!의 2의 지수승 - (n-m)!의 2의 지수승 - m!의 2의 지수승
-        // cnt5 = n!의 5의 지수승 - (n-m)!의 5의 지수승 - m!의 5의 지수승
-        int cnt2 = count2(factorial(n)) - count2(factorial(n-m)) - count2(factorial(m));
-        int cnt5 = count5(factorial(n)) - count5(factorial(n-m)) - count5(factorial(m));
-        int ans = Math.min(cnt2,cnt5);
+        // nCm = n! / ((n-k)! * k!)
+        // cnt5 = n!의 5의 지수승 - (n-k)!의 5의 지수승 - k!의 5의 지수승
+        int ans5 = cnt5(n) - cnt5(n-k) - cnt5(k);
+        int ans2 = cnt2(n) - cnt2(n-k) - cnt2(k);
+        int ans = Math.min(ans2,ans5);
 
         System.out.println(ans);
         br.close();

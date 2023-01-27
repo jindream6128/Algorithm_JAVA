@@ -17,6 +17,9 @@ public class gcd {
         // a>b일때 한정, 아니면 두개 바꿔서 생각
         //(a,b) -> (a%b, b)
     }
+    private static long gcd(long a, long b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
