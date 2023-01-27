@@ -1,8 +1,6 @@
 package boj_23888;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.StringTokenizer;
 
 public class boj_23888 {
@@ -29,6 +27,7 @@ public class boj_23888 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
         //초항a 공차 d
         a = Integer.parseInt(st.nextToken());
@@ -47,7 +46,8 @@ public class boj_23888 {
                 //등차급수 구하기
                 int l = Integer.parseInt(st.nextToken());
                 int r = Integer.parseInt(st.nextToken());
-                System.out.println(sumsequence(l, r));
+                bw.write(String.valueOf(sumsequence(l,r)));
+                bw.newLine();
             }
             if (tc == 2) {
                 //gcd 값들중 gcd 구하기
@@ -57,9 +57,12 @@ public class boj_23888 {
                 if (l == r) {
                     gcdtmp = arithmeticsequence(l);
                 }
-                System.out.println(gcdtmp);
+                bw.write(String.valueOf(gcdtmp));
+                bw.newLine();
+
             }
         }
+        bw.close();
         br.close();
 
     }
