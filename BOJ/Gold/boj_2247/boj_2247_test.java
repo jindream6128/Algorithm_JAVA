@@ -1,30 +1,27 @@
 package boj_2247;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class boj_2247_test {
 
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         //일단 입력 n 자체는 2억까지
-        int n = Integer.parseInt(br.readLine());
+        long n = Long.parseLong(br.readLine());
         long ans = 0;
 
-        for (long i = 2; i * i <= n; i++) {
-            if (n % i == 0) {
-                long j = n / i;
-                if (i == j) {
-                    ans += i;
-                } else {
-                    ans += i + j;
-                }
-            }
+        ans -= n;
+        ans -= (n*(n+1))/2;
+        ans += 1;
+        for(int i =1;i<=n;i++){
+            ans += (i*(n/i));
+            ans %= 1_000_000;
         }
 
-        System.out.println(ans % 1_000_000);
+        bw.write(String.valueOf(ans));
+        bw.close();
         br.close();
     }
 }
