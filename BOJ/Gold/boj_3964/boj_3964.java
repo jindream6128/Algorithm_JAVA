@@ -42,7 +42,7 @@ public class boj_3964 {
                 long tmp;
                 long num =k;
                 long num2 =n;
-                long result;
+                long result = 0;
                 for(int p =2; p*p<=k;p++){
                     int cnt1 = 0;
                     while(num%p ==0){

@@ -2,8 +2,7 @@ package boj_2247;
 
 import java.io.*;
 
-public class boj_2247_test {
-
+public class boj_2247_my_ans {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
