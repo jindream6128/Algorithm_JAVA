@@ -3,7 +3,6 @@ package boj_1749;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.InvalidObjectException;
 import java.util.StringTokenizer;
 
 public class boj_1749 {
