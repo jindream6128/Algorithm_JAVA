@@ -23,7 +23,7 @@ public class boj_2003 {
         int L = 1, R = 1, cnt = 0;
         int sum = 0;
 
-        while (L < n) {
+        while (L <= n) {
             if (sum >= m) {
                 sum -= arr[L];
                 L++;
