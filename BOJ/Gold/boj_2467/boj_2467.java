@@ -20,11 +20,11 @@ public class boj_2467 {
         }
 
         int L=1,R=n;
-        int best_sum = arr[1]+arr[n];
+        long best_sum = arr[1]+arr[n];
         int index1=1,index2=n;
 
         while(L<R){
-            int sum = arr[L]+arr[R];
+            long sum = arr[L]+arr[R];
             if(Math.abs(sum)<Math.abs(best_sum)){
                 best_sum = sum;
                 index1 = L;
@@ -32,10 +32,14 @@ public class boj_2467 {
             }
 
             //여기서 L==R은 같을수 없다 왜냐하면 두개의 용액을 합치는거기 때문에 반드시 L<R이여야 한다.
-            //그래서 그냥 sum이 0보다 크거나, 작거나로 판단했고, sum == 0이더라도 어짜피 오름차순으로 돌아야 하기때문에 끝까지 확인해야 한다.
             if(sum>0){
                 R--;
-            }else{
+            }else if(sum ==0){
+                index1 = L;
+                index2 = R;
+                break;
+            }
+            else{
                 L++;
             }
         }
