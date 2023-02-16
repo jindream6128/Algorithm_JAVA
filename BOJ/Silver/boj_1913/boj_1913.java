@@ -18,8 +18,6 @@ public class boj_1913 {
     static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, 1, 0, -1};
 
-    //다음 x,y 좌표
-    static int nx, ny;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,8 +30,8 @@ public class boj_1913 {
         arr = new int[n][n];
 
         //현재 x,y좌표 (1로서 시작되는 곳)
-        int x = n / 2;
-        int y = n / 2;
+        int x = (n / 2) + 1;
+        int y = (n / 2) + 1;
 
         //방향 인덱스 번호
         int index = 0;
@@ -41,6 +39,8 @@ public class boj_1913 {
         //시작지점 가운데 -> x,y좌표의 가운데
         arr[x][y] = 1;
 
+        //다음 좌표
+        int nx , ny;
         //이제 25까지 반복
         while (true) {
             nx = x + dx[index];
@@ -54,10 +54,11 @@ public class boj_1913 {
                 if (arr[nx][ny] == n * n) break;
 
                 //그리고 좌표 갱신
-                nx = x;
-                ny = y;
+                x = nx;
+                y = ny;
             } //next x, next y좌표가 범위를 벗어나거나, 이미 안에 수가 들어가있다면, index증가
             else {
+                //범위를 벗어난다면 index를 늘려준다.
                 //계속 반복되는거니까 모듈러 연산 해주기
                 index = (index + 1) % 4;
             }
