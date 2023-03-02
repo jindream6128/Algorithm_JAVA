@@ -13,21 +13,30 @@ public class boj_1654 {
         for(int i = 0 ; i<k ; i++){
             arr[i] = Integer.parseInt(br.readLine());
         }
-
         //오름차순 정렬
         Arrays.sort(arr);
-        int maxNum = arr[k-1];
-        while(true){
-            int cnt =0;
-            maxNum /= 2;
-            for(int j = 0; j<k;j++){
-                cnt += arr[j]/maxNum;
+        // 457 539 743 802 11개
+        long e = arr[k-1];
+        long s = 1;
+        long ans=0 ;
+        while(s <= e){
+            long mid = (e+s)/2;
+
+            long cnt = 0;
+            for(int i = 0; i<k; i++){
+                cnt += (arr[i]/mid);
             }
-            if(n<=cnt){
-                break;
+
+            if(cnt>=n){
+                ans = mid;
+                s = mid+1;
+            }else{
+                e = mid-1;
             }
+
         }
-        System.out.println(maxNum);
+
+        System.out.println(ans);
         br.close();
     }
 }
