@@ -25,7 +25,6 @@ public class boj_13423 {
                 int e = s+2;
                 for(int m = s+1; m<n-1; m++){
                     int num = arr[m] - arr[s];
-
                     while(e < n && arr[e] - arr[m] < num){
                         e++;
                     }

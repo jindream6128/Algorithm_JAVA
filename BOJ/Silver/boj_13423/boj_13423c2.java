@@ -27,7 +27,6 @@ public class boj_13423c2 {
                 int e = s + 2;
                 for (int m = s + 1; m < n - 1; m++) {
                     int num = arr.get(m) - arr.get(s);
-
                     while (e < n && arr.get(e) - arr.get(m) < num) {
                         e++;
                     }
