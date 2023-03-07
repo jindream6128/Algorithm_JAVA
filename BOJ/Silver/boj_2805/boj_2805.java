@@ -23,7 +23,7 @@ public class boj_2805 {
 
         int min = 0;
         int max = arr[n-1];
-
+        //매개변수
         while(min<=max){
             long tmpSum = 0;
             int mid = (min + max) /2;
