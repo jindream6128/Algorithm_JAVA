@@ -17,7 +17,7 @@ public class boj_13702 {
             arr[i] = Integer.parseInt(br.readLine());
         }
         Arrays.sort(arr);
-
+        //이분탐색
         long min =0;
         //max값을 그냥 Integer.Max_value로 생각
         long max = Integer.MAX_VALUE;
