@@ -22,6 +22,7 @@ public class Main{
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static StringTokenizer st;
     static int n, m;
+    //여기서 n자리 m진수 
     static int[] arr;
     
     public static void main(String[] args) throws IOException{
@@ -29,6 +30,7 @@ public class Main{
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
         arr = new int[n];
+        //여기는 자리 최종적으로 만들어지는 숫자
         
         recur(0);
         br.close();
@@ -41,6 +43,7 @@ public class Main{
             return;
         }
         
+        //진수 3진수면 0 1 2 넣기
         for(int i =0; i<m; i++){
             arr[cur] = i;
             recur(cur +1);
