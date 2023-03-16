@@ -1,22 +1,22 @@
 import java.io.*;
 
 public class example {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args){
+        int[] arr = {10,30,20,450,120,12};
 
-        int[] arr = new int[9];
-        int[] arr2 = {1,2,3,4,5,6,7,8,9};
+        int tmp=0;
 
-        arr2[0] =0;
-
-        for (int i =0; i<9; i++){
-            System.out.println(arr2[i]);
+        for(int i =0; i<arr.length;i++){
+            for(int j =1; j<arr.length-1 ; j++){
+                if(arr[j-1]>arr[j]){
+                    tmp = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = tmp;
+                }
+            }
         }
 
-        br.close();
-        bw.close();
-
-
     }
+
+
 }
