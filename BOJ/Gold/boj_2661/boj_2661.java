@@ -21,6 +21,6 @@ public class boj_2661 {
             return;
         }
 
-        for(int i =1;)
+//        for(int i =1;)
     }
 }
