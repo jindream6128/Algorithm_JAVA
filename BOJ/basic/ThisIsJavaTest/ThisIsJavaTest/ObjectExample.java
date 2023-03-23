@@ -15,6 +15,7 @@ public class ObjectExample {
 
     //member.length = 5
     int k = member.length;
+
     //이름 객체
     String[] name = new String[k];
 
@@ -151,6 +152,7 @@ public class ObjectExample {
         }
         return total/5;
     }
+
     //나이별 정렬
     public int[] sortAge(){
         int[] sortAge = new int[k];
