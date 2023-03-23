@@ -1,4 +1,4 @@
-package ThisIsJavaTest;
+package ThisIsJavaTest.ThisIsJavaTest;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -7,58 +7,76 @@ public class twoArray {
 
     // 일단 2 5 지정하기
     int[][] arr = new int[2][5];
+    //꽉 차면 세로로 길어지는 구조
 
     // 해당 값의 index 넣기
     static StringBuilder searchBuilder = new StringBuilder();
 
+    //0이 아닌 -1을 초기값으로
+    public void arrReset(){
+        for(int i = 0;i<arr.length;i++){
+            for(int j =0 ; j<5;j++){
+                arr[i][j] = -1;
+            }
+        }
+    }
+
     // isFull -> 전부다 찾는지 확인하기 -> 마지막 꺼만 check;
     public boolean isFull() {
-        // 제일 마지막 값이 0이 아니면 꽉찬거임.
-        if (arr[arr.length - 1][arr[0].length - 1] != 0)
+        // 제일 마지막 값이 -1이 아니면 꽉찬거임.
+        if (arr[arr.length - 1][4] != -1)
             return true;
         return false;
     }
 
     //emptyIndex -> 비어있으면 비어있는거의 해당 index 반환
-    //emptyIndex -> 비어있지 않으면 0이 반환된다
     // emptyIndex -> 비어있는지 확인 -> 비면 해당 인덱스 리턴
-    // 만약 tmp의 값이 tmp[0]의 값이 0 이면 비어있는거임
+    // 만약 tmp의 값이 tmp[0]의 값이 -1 이면 비어있는거임
     public int[] emptyIndex() {
         int[] tmp = new int[2];
 
         for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[0].length; j++) {
-                if (arr[i][j] == 0) {
+            for (int j = 0; j < 5; j++) {
+                //-1이면 비어있다
+                if (arr[i][j] == -1) {
                     tmp[0] = i;
                     tmp[1] = j;
                     return tmp;
                 }
             }
         }
+
+        //비어있는게 없으면 tmp = [-1,-1]; 이 반환된다.
+        tmp[0] = -1;
+        tmp[1] = -1;
         return tmp;
     }
 
     // increment -> 꽉찾을때 2 5 -> 3 5 로 늘려주기
     public void increment() {
         // isFull-> 꽉찾을때만 확장해준다
-        if (isFull()) {
-            // tmp -> arr랑 같은 사이즈의 배열을 선언해놓고,
-            // 같은 배열을 복사해놓는다
-            int[][] tmp = new int[arr.length][arr.length];
-            for (int i = 0; i < tmp.length; i++) {
-                for (int j = 0; j < tmp[0].length; j++) {
-                    tmp[i][j] = arr[i][j];
-                }
-            }
+        // 꽉 안찾으면 바로 return
+        if (!isFull()) return;
 
-            arr = new int[arr.length + 1][arr[0].length];
-            for (int i = 0; i < tmp.length; i++) {
-                for (int j = 0; j < tmp[0].length; j++) {
-                    arr[i][j] = tmp[i][j];
-                }
+        // tmp -> arr랑 같은 사이즈의 배열을 선언해놓고,
+        // 같은 배열을 복사해놓는다
+        int[][] tmp = new int[arr.length][5];
+        for (int i = 0; i < tmp.length; i++) {
+            for (int j = 0; j < 5; j++) {
+                tmp[i][j] = arr[i][j];
             }
         }
 
+        arr = new int[arr.length + 1][5];
+        for (int i = 0; i < tmp.length; i++) {
+            for (int j = 0; j < 5; j++) {
+                arr[i][j] = tmp[i][j];
+            }
+        }
+        //-1로 초기화 마지막 줄만
+        for(int i=0;i<5;i++){
+            arr[arr.length-1][i] =-1;
+        }
     }
 
     // search ->해당 값의 인덱스 반환
@@ -66,9 +84,9 @@ public class twoArray {
     public void search(int n) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[0].length; j++) {
-                if (arr[i][j] == n) {
-                    searchBuilder.append("arr[" + i + "]" + "[" + j + "]").append(" / ");
-                }
+                if (arr[i][j] != n) continue;
+
+                searchBuilder.append("arr[" + i + "]" + "[" + j + "] ");
             }
         }
     }
@@ -77,9 +95,9 @@ public class twoArray {
     public void modify(int a, int b) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[0].length; j++) {
-                if (arr[i][j] == a) {
-                    arr[i][j] = b;
-                }
+                if (arr[i][j] != a) continue;
+
+                arr[i][j] = b;
             }
         }
     }
@@ -88,83 +106,103 @@ public class twoArray {
     public void delete(int n) {
         // for 문 다돌고 나면 0인거 앞으로 땡겨줘야함
         for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length; j++) {
-                if (arr[i][j] == n) {
-                    arr[i][j] = 0;
+            for (int j = 0; j < 5; j++) {
+                if (arr[i][j] != n) continue;
+
+                //초기 값은 -1
+                arr[i][j] = -1;
+            }
+        }
+        //만약에 삭제된 값이면 앞으로 당기는 logic이 필요하다.
+        int[][] tmp = new int[arr.length][5];
+        for(int i =0; i<arr.length;i++){
+            for(int j =0; j<5;j++){
+                tmp[i][j] = arr[i][j];
+            }
+        }
+
+        arrReset();
+        for(int i =0; i<arr.length;i++){
+            for(int j = 0;j<5;j++){
+                if(tmp[i][j] != -1){
+                    add(tmp[i][j]);
                 }
             }
         }
-        // 아직 안땡겨줌
 
     }
 
     // add 일단 한개만 추가할때
     public void add(int n) {
-        // 가득 차 있으면 확장시켜야함
-        if (isFull()) {
-            increment();
-            //여기가 이상한데?
-            // 0이면 비어있지 않은거다
-            if (emptyIndex()[0] != 0) {
-                arr[emptyIndex()[0]][emptyIndex()[1]] = n;
-            }
-        } else {
-            if (emptyIndex()[0] != 0) {
-                arr[emptyIndex()[0]][emptyIndex()[1]] = n;
-            }
-        }
+        int[] k= emptyIndex();
 
+        // 가득 차 있으면 확장시켜야함
+        if (isFull()) increment();
+
+        //비어있는거 찾기 -> k[X,X] 에 값이 들어가있으면 비어있는거다.
+        if (k[0] != -1) {
+            arr[k[0]][k[1]] = n;
+        }
+    }
+    //OverLoad
+    public void add(int a, int b) {
+        add(a);
+        add(b);
     }
 
-    // add 매개변수 2개 들어갈때
-    /*
-     * public void add() {
-     *
-     * }
-     */
 
     // main메서드 -> 입력받고 -> switch 돌려서 진행하기
     public static void main(String[] args) {
         twoArray t = new twoArray();
+        //arrReset으로 -1 먼저 넣기
+        t.arrReset();
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("1: add 2: search 3: modify 4: delete 5: print 6: exit");
+            System.out.println("1: add 2: 2개 이상 add 3: search 4: modify 5: delete 6: print 7: exit");
 
             int tc = sc.nextInt();
 
             switch (tc) {
 
                 case 1:
-                    System.out.println("1 이상의 add할 값 1개 입력해 주세요");
+                    System.out.println("0 이상의 add할 값 1개 입력해 주세요");
                     int tc1 = sc.nextInt();
                     t.add(tc1);
                     break;
 
                 case 2:
+                    System.out.println("0 이상의 add할 값을 2개 입력해 주세요");
+                    int c1 = sc.nextInt();
+                    int c2 = sc.nextInt();
+                    t.add(c1,c2);
+                    break;
+
+                case 3:
                     System.out.println("search 할 값을 입력해 주세요");
                     int tc2 = sc.nextInt();
+                    t.search(tc2);
                     System.out.println(searchBuilder);
                     break;
                 // 넣고 출력하기
 
-                case 3:
+                case 4:
                     System.out.println("원본값 a와 수정할 값 b를 입력해 주세요");
                     int tc3 = sc.nextInt();
                     int tc4 = sc.nextInt();
                     t.modify(tc3, tc4);
                     break;
 
-                case 4:
+                case 5:
                     System.out.println("삭제할 값을 입력해 주세요");
                     int tc5 = sc.nextInt();
                     t.delete(tc5);
                     break;
 
-                case 5:
+                case 6:
                     System.out.println(Arrays.deepToString(t.arr));
                     break;
 
-                case 6:
+                case 7:
                     System.exit(0);
             }
         }
