@@ -19,6 +19,8 @@ public class twoArray {
         return false;
     }
 
+    //emptyIndex -> 비어있으면 비어있는거의 해당 index 반환
+    //emptyIndex -> 비어있지 않으면 0이 반환된다
     // emptyIndex -> 비어있는지 확인 -> 비면 해당 인덱스 리턴
     // 만약 tmp의 값이 tmp[0]의 값이 0 이면 비어있는거임
     public int[] emptyIndex() {
@@ -101,12 +103,13 @@ public class twoArray {
         // 가득 차 있으면 확장시켜야함
         if (isFull()) {
             increment();
-            // 0이면 비어있는거다
-            if (emptyIndex()[0] == 0) {
+            //여기가 이상한데?
+            // 0이면 비어있지 않은거다
+            if (emptyIndex()[0] != 0) {
                 arr[emptyIndex()[0]][emptyIndex()[1]] = n;
             }
         } else {
-            if (emptyIndex()[0] == 0) {
+            if (emptyIndex()[0] != 0) {
                 arr[emptyIndex()[0]][emptyIndex()[1]] = n;
             }
         }
