@@ -13,5 +13,6 @@ public class boj_15727 {
             ans ++;
         }
         System.out.println(ans);
+        System.out.println(ans);
     }
 }
